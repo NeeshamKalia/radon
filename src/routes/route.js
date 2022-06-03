@@ -70,4 +70,58 @@ router.post("/test-post-4", function(req, res) {
     res.send(  { msg: arr , status: true }  )
 })
 
+
+
+let players =  [
+        {
+   "name": "manish",
+   "dob": "1/1/1995",
+   "gender": "male",
+   "city": "jalandhar",
+   "sports": [
+   "swimming"
+   ]
+   },
+   
+   {
+   "name": "Suresh",
+   "dob": "1/1/1991",
+   "gender": "male",
+   "city": "Ludhiana",
+   "sports": [
+   "cricket"
+   ]
+   },
+   
+   {
+   "name": "Ramesh",
+   "dob": "1/1/199",
+   "gender": "female",
+   "city": "Chandigarh",
+   "sports": [
+   "Tennis"
+   ]
+   }
+    ]
+router.post("/players", function(req,res){
+     let name = req.body.name;
+    let add = true
+    for(let i = 0; i<players.length; i++){
+        if (players[i].name === name){
+            add = false;
+        }
+    }
+    if (add == true){
+        players.push(req.body)
+    }
+        
+    res.send({data:players, status: true})
+});
+
+
+
+        
+
+
+
 module.exports = router;
