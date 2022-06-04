@@ -3,8 +3,100 @@ const myHelper = require('../util/helper')
 const underscore = require('underscore')
 
 const router = express.Router();
+//1 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-router.get('/test-me', function (req, res) {
+router.get('/movies', function(req,res){
+    movies = ["Chal mera putt", "Carry on Jatta", "Yaar anmulle", "Vaisakhi list", "Ardaas"]
+    res.send(movies)
+});
+
+//2 n 3 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+movies = ["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"]
+router.get('/movies/:indexNumber', function(req, res){
+    
+    if (req.params.indexNumber > movies.length){
+        res.send("please use right index number");
+    }
+    else {
+        res.send(movies[req.params.indexNumber]);
+    
+    }
+});
+
+//4 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+router.get('/films', function(req,res){
+    movies = [
+         {
+        "id": 1,
+        "name": "The Shining"
+       },
+        {
+        "id": 2,
+        "name": "Incendies"
+       }, 
+       {
+        "id": 3,
+        "name": "Rang de Basanti"
+       }, 
+       {
+        "id": 4,
+        "name": "Finding Nemo"
+       }
+       ]
+    res.send(movies)
+    });
+
+ //5 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&      
+
+ router.get('/films/:filmId', function(req,res){
+    movies = [
+        {
+       "id": 1,
+       "name": "The Shining"
+      },
+       {
+       "id": 2,
+       "name": "Incendies"
+      }, 
+      {
+       "id": 3,
+       "name": "Rang de Basanti"
+      }, 
+      {
+       "id": 4,
+       "name": "Finding Nemo"
+      }
+      ]
+      
+      if (req.params.filmId > movies.length){
+        res.send("No movie exists with this id");
+       }
+      else {
+            for (let  i = 0; i<movies.length; i++){
+               if (req.params.filmId == movies[i].id){
+                
+                res.send(movies[i])
+                
+                
+                
+               }
+            }    
+        }  
+    });
+    
+   
+        
+    
+    
+    
+             
+       
+       
+
+
+/* router.get('/test-me', function (req, res) {
     myHelper.printDate()
     myHelper.getCurrentMonth()
     myHelper.getCohortData()
@@ -35,7 +127,7 @@ router.get('/candidates/:canidatesName', function(req, res){
     console.log('Candidates name is '+req.params.canidatesName)
     res.send('Done')
 })
-
+ */
 
 module.exports = router;
 // adding this comment for no reason
