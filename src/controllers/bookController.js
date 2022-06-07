@@ -15,25 +15,26 @@ const createBook= async function (req, res) {
  }
 
  const getBooksInYear = async function(req, res){
-    let years= req.body.years
-     let neededBooks = await BookModel.find({year: {years}})
+     years= req.params.years
+     let neededBooks = await BookModel.find({"year": years}).select({"bookName":1})
      res.send({msg: neededBooks})
  }
 
  const getParticularBook = async function(req,res){
     let parti = req.body
-    let data = await BookModel.find(x)
+    let data = await BookModel.find(parti)
     res.send({msg: data})
 }
 
  const getXINRBooks = async function(req,res){
-     let indianPrice = prices.indianPrice
-        let INRBooksfind = await BookModel.find({ indianPrice: { $in: ["100INR", "200INR", "500INR"] }     })
+        let indianPrice = "prices".indianPrice
+        let INRBooksfind = await BookModel.find({ "indianPrice": "100INR" }   )
         res.send({msg: INRBooksfind})
- }
+ }  //{ $in: ["100INR", "200INR", "500INR"] } }
 
  const getRandomBooks = async function (req,res){
      let randomBook = await BookModel.find({$or:[{stockAvailable: true}, {totalPages: {$gt: 500}}]})
+     res.send({msg: randomBook})
  }
 
  
