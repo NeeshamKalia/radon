@@ -5,14 +5,25 @@ const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
 const commonMW = require ("../middlewares/commonMiddlewares")
 
-router.get("/test-me", function (req, res) {
+/* router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
+ */
+const mid= async function (req, res, next) {
+    console.log("LOGGED")
+    let a = new Date().toLocaleString()
+
+    let b  = req.route.path
+    let c = req.ip
+    console.log(a)
+    console.log(b)
+    console.log(c)
+    next() }
 
 
 
 
-router.post("/createBook", BookController.createBook  )
+router.post("/mydata", mid, BookController.mydata  )
 
 
 
