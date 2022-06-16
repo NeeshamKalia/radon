@@ -5,7 +5,7 @@ const tokencheck = async function(req,res,next){
     let token = req.headers["x-Auth-token"];
     if (!token) token = req.headers["x-auth-token"];
   
-    if (!token) return res.send({ status: false, msg: "token must be present" });
+    if (!token) return res.status(400).send({msg: "BAD REQUEST"})
   
   //console.log(token);
   next()
@@ -14,10 +14,14 @@ const tokencheck = async function(req,res,next){
 
 const useridCheck = async function (req,res,next){
     let userId = req.params.userId;
+    if (!userId){
+      res.status(400).send({msg: "BAD REQUEST"})
+    }
+    
     let user = await userModel.findById(userId);
     //Return an error if no user with the given id exists in the db
     if (!user) {
-      return res.send("No such user exists");
+      res.status(401).send({msg: "Unauthorized"})
     }
     //console.log(user)
     next()
@@ -29,7 +33,7 @@ const validUser = async function (req,res,next){
     
   let decodedToken = jwt.verify(token, 'functionup-radon')
   let userLoggedIn = decodedToken.userId
-  if(userToBeModified != userLoggedIn) return res.send({status: false, msg: 'User logged is not allowed to modify the requested users data'})
+  if(userToBeModified != userLoggedIn) return res.status(403).send({status: false, msg: 'FORBIDDEN -User logged is not allowed to modify the requested users data'})
   next()
 }
 
