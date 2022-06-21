@@ -119,7 +119,7 @@ Refer below sample
   "subcategory": ["Non fiction", "Self Help"],
   "published": false,
   "publishedAt": "", // if published is true publishedAt will have a date 2021-09-17T04:25:07.803Z
-  "deleted": false,
+  "deleted": false,,,
   "deletedAt": "", // if deleted is true deletedAt will have a date 2021-09-17T04:25:07.803Z,
   "createdAt": "2021-09-17T04:25:07.803Z",
   "updatedAt": "2021-09-17T04:25:07.803Z",
